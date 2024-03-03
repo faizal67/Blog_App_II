@@ -15,9 +15,12 @@ const Home = () => {
             .catch(console.log('Error occur at home'))
     }, [])
 
-const userStatus = useSelector((state)=> state.auth.status)
+    const userStatus = useSelector((state) => state.auth.status)
 
-!userStatus && <div><Container><h1>Please Login first to read the Blog</h1><Link to='/login'>Login</Link></Container></div>
+    if (!userStatus)
+        return (
+            <div><Container><h1>Please <Link to='/login' className='text-blue-700'>Login</Link> first to read the Blog</h1></Container></div>
+        )
 
     if (posts.length === 0)
         return (
